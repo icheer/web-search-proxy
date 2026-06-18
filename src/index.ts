@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import express from 'express';
 import { searchHandler } from './search.js';
 import { fetchHandler } from './fetch.js';
