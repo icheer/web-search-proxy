@@ -1,7 +1,7 @@
 FROM node:20-alpine AS builder
 WORKDIR /app
 COPY package*.json ./
-RUN npm ci
+RUN npm install -g npm@latest && npm ci
 COPY . .
 RUN npm run build
 
@@ -9,7 +9,7 @@ FROM node:20-alpine AS runner
 ENV NODE_ENV=production
 WORKDIR /app
 COPY package*.json ./
-RUN npm ci --omit=dev
+RUN npm install -g npm@latest && npm ci --omit=dev
 COPY --from=builder /app/dist ./dist
 EXPOSE 3030
 CMD ["node", "dist/index.js"]
