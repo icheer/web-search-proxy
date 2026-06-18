@@ -28,7 +28,7 @@ export async function fetchHandler(req: Request, res: Response) {
     const html = await response.text();
     const title = /<title[^>]*>([^<]+)<\/title>/i.exec(html)?.[1]?.trim() ?? '';
     const content = markdown ? td.turndown(html)
-      : sanitize ? html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()
+      : sanitize ? html.replace(/<script[\s\S]*?<\/script>/gi, '').replace(/<style[\s\S]*?<\/style>/gi, '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()
       : html;
     res.json({ title, content });
   } catch (e) {
