@@ -87,6 +87,27 @@ cp .env.example .env
 
 ## Docker
 
+直接使用预构建镜像，无需本地编译：
+
+```bash
+docker run -d -p 3030:3030 --restart always icheerme/web-search-proxy:latest
+```
+
+或使用 docker-compose：
+
+```yaml
+services:
+  web-search-proxy:
+    image: icheerme/web-search-proxy:latest
+    ports:
+      - "3030:3030"
+    restart: always
+    environment:
+      - TZ=Asia/Shanghai
+```
+
+自行构建：
+
 ```bash
 docker build -t web-search-proxy .
 docker run -p 3030:3030 web-search-proxy
