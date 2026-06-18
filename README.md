@@ -93,7 +93,9 @@ npm run dev   # 监听 :3030
 | 环境变量 | 默认值 | 说明 |
 |----------|--------|------|
 | `PORT` | 3030 | 监听端口 |
-| `BLOCKED_DOMAINS` | `localhost,127.0.0.1,::1,0.0.0.0` | `/fetch` 域名黑名单，逗号分隔。支持精确匹配（`192.168.1.1`）、通配符（`*.internal`）、特殊值 `[bare]`（拦截所有无点裸主机名如 `redis`、`jenkins`） |
+| `BLOCKED_DOMAINS` | `localhost,127.0.0.1,::1,0.0.0.0,[bare]` | `/fetch` 域名黑名单，逗号分隔。支持精确匹配（`192.168.1.1`）、通配符（`*.internal`）、特殊值 `[bare]`（拦截所有无点裸主机名如 `redis`、`jenkins`） |
+| `ADMIN_PASSWORD` | 未设置 | 设置后启用 `GET /logs?password=xxx` 接口，查看最近50条搜索和抓取记录；未设置时接口返回 404 |
+| `TZ` | `Asia/Shanghai` | 日志时间显示时区 |
 
 ## 自行构建镜像
 

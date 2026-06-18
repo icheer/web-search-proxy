@@ -1,4 +1,5 @@
 import type { Request, Response } from 'express';
+import { logSearch } from './logs.js';
 
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36';
 const TITLE_RE = /<a[^>]+class="result__a"[^>]*href="([^"]+)"[^>]*>([^<]+)<\/a>/g;
@@ -26,6 +27,7 @@ export async function searchHandler(req: Request, res: Response) {
   const { query, count = 10 } = req.body as { query: string; count?: number };
   if (!query) { res.status(400).json({ error: 'query is required' }); return; }
   try {
+    logSearch(query);
     res.json(await ddgSearch(query, count));
   } catch (e) {
     res.status(500).json({ error: (e as Error).message });
